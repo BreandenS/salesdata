@@ -38,14 +38,12 @@ def average_sales_calculation(df):
     daily_sales = df.groupby(df["Date"].dt.date)["Sales Amount"].mean()
     print("Daily Sales Averages:")
     print(daily_sales)
-
-    # Calculate monthly sales averages
+    
     df["YearMonth"] = df["Date"].dt.to_period("M")
     monthly_sales = df.groupby("YearMonth")["Sales Amount"].mean()
     print("Monthly Sales Averages:")
     print(monthly_sales)
 
-    # Calculate product sales averages
     product_sales = df.groupby("Product")["Sales Amount"].mean()
     print("Product Sales Averages:")
     print(product_sales)
@@ -66,6 +64,36 @@ def best_selling_products(df):
     print(f"Total Sales: {best_product_sales}")
 
 
+def sales_per_region(df):
+    if "Region" not in df.columns or "Sales Amount" not in df.columns:
+        print("Error: Required columns are missing for this calculation.")
+        return
+
+    sales_by_region = df.groupby("Region")["Sales Amount"].sum()
+
+    print("Total Sales per Region:")
+    print(sales_by_region)
+    
+    
+def month_over_month_growth(df):
+    if "Date" not in df.columns or "Sales Amount" not in df.columns:
+        print("Error: Required columns are missing for this calculation.")
+        return
+
+    df["Date"] = pd.to_datetime(df["Date"], format="%d/%m/%Y", errors='coerce')
+    if df["Date"].isnull().any():
+        print("Warning: Some dates could not be parsed and have been set to NaT.")
+    
+    df["YearMonth"] = df["Date"].dt.to_period("M")
+    monthly_sales = df.groupby("YearMonth")["Sales Amount"].sum()
+
+    monthly_growth = monthly_sales.pct_change() * 100
+
+    print("Month-over-Month Sales Growth (%):")
+    print(monthly_growth)
+    
+
+
 def main():
     file_path = "salesdata.csv"
     df = read_and_print_csv(file_path)
@@ -73,6 +101,8 @@ def main():
     print("Total Sales:", total_sales)
     average_sales_calculation(df)
     best_selling_products(df)
+    sales_per_region(df)
+    month_over_month_growth(df)
 
 
 if __name__ == "__main__":
