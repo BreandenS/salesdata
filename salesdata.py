@@ -3,7 +3,7 @@ import pandas as pd
 
 def read_and_print_csv(file_path):
     df = pd.read_csv(file_path, delimiter=";")
-
+    print(df.head())
     return df
 
 
@@ -51,12 +51,28 @@ def average_sales_calculation(df):
     print(product_sales)
 
 
+def best_selling_products(df):
+
+    if "Product" not in df.columns or "Sales Amount" not in df.columns:
+        print("Error: Required columns are missing for this calculation.")
+        return
+
+    total_sales_by_product = df.groupby("Product")["Sales Amount"].sum()
+
+    best_product = total_sales_by_product.idxmax()
+    best_product_sales = total_sales_by_product.max()
+
+    print(f"Best Selling Product: {best_product}")
+    print(f"Total Sales: {best_product_sales}")
+
+
 def main():
     file_path = "salesdata.csv"
     df = read_and_print_csv(file_path)
     total_sales = calculate_sales(df)
     print("Total Sales:", total_sales)
     average_sales_calculation(df)
+    best_selling_products(df)
 
 
 if __name__ == "__main__":
