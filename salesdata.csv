@@ -1,0 +1,21 @@
+Date;Product;Sales Amount;Quantity Sold;Region
+01/01/2024;Product A;500;10;North
+01/01/2024;Product B;300;5;East
+02/01/2024;Product C;400;8;South
+02/01/2024;Product A;700;14;West
+03/01/2024;Product B;350;6;North
+03/01/2024;Product C;450;9;East
+04/01/2024;Product A;600;12;South
+04/01/2024;Product B;320;5;West
+05/01/2024;Product C;500;10;North
+05/01/2024;Product A;800;16;East
+06/01/2024;Product B;380;7;South
+06/01/2024;Product C;420;8;West
+07/01/2024;Product A;900;18;North
+07/01/2024;Product B;340;6;East
+08/01/2024;Product C;460;9;South
+08/01/2024;Product A;850;17;West
+09/01/2024;Product B;360;7;North
+09/01/2024;Product C;480;10;East
+10/01/2024;Product A;920;18;South
+10/01/2024;Product B;330;6;Wests
